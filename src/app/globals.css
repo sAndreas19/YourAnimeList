@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #FF4B91; /*Sakura Neon*/
+  --color-secondary: #FFB4D6; /*Kawaii Blush*/
+  --color-main-background: #0F0F1A; /*Abys Void*/
+  --color-cards: #1E1E28; /*Plot armor*/
+  --color-text: #F2F2F5; /*Subtitle White*/
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-main-background);
+  color: var(--color-text)
+}
+
+img {
+  transition: .3s ease all;
+  -webkit-transition: .3s ease all;
+  -moz-transition: .3s ease all;
+  -ms-transition: .3s ease all;
+  -o-transition: .3s ease all;
+}
+
+img:hover {
+  scale: 105%;
+}
