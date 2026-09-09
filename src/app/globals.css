@@ -6,10 +6,12 @@
   --color-main-background: #0F0F1A; /*Abys Void*/
   --color-cards: #1E1E28; /*Plot armor*/
   --color-text: #F2F2F5; /*Subtitle White*/
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui;
+  --font-display: var(--font-syne), ui-sans-serif, system-ui;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
   background-color: var(--color-main-background);
   color: var(--color-text)
 }
@@ -24,4 +26,35 @@ img {
 
 img:hover {
   scale: 105%;
+}
+
+.loading {
+  width: 100px;
+  height: 100px;
+  display: grid;
+  border:8px solid #0000;
+  border-radius: 50%;
+  border-color:#FFB4D6 #0000;
+  animation: s6 0.5s infinite linear;
+}
+.loading::before,
+.loading::after {    
+  content:"";
+  grid-area: 1/1;
+  margin:4px;
+  border:inherit;
+  border-radius: 50%;
+}
+.loading::before {
+  border-color:#FF4B91 #0000;
+  animation:inherit; 
+  animation-duration: 0.25s;
+  animation-direction: reverse;
+}
+.loading::after {
+  margin:16px;
+}
+
+@keyframes s6 { 
+  100%{transform: rotate(1turn)}
 }
