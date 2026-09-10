@@ -1,13 +1,12 @@
 import AnimeList from "@/src/components/AnimeList";
 import Header from "@/src/components/AnimeList/Header";
+import { getAnime } from "../../libs/fetch-api";
 
 const Page = async ({ params }: any) => {
 
 const { keyword } = await params
 const decodeKeyword = decodeURI(keyword)
-
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/anime?filter[text]=${keyword}`, {next: {revalidate: 86400}})
-  const searchAnime = await response.json()
+  const searchAnime = await getAnime("anime", `filter[text]=${keyword}`)
 
   return (
     <>

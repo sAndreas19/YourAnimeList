@@ -5,6 +5,8 @@ import HeaderMenu from "@/src/components/Utilities/HeaderMenu";
 import { useEffect, useState } from "react";
 import AnimeList from "@/src/components/AnimeList";
 import Loading from "../loading";
+import { getActiveResourcesInfo } from "process";
+import { getAnime } from "../libs/fetch-api";
 
 const Page = () => {
   const [topAnime, setTopAnime] = useState<any>(null);
@@ -16,10 +18,8 @@ const Page = () => {
     const fetchData = async () => {
       setLoading(true)
       const currentOffset = (page - 1) * 20;
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime?page[limit]=20&page[offset]=${currentOffset}&sort=-userCount`,
-      );
-      const data = await response.json();
+
+      const data = await getAnime("anime", `page[limit]=20&page[offset]=${currentOffset}&sort=-userCount`)
 
       setTopAnime(data);
       setLoading(false);

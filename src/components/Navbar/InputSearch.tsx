@@ -23,7 +23,7 @@ const InputSearch = () => {
           className="w-full border-1 rounded p-2"
           required
         />
-        <button className="absolute top-2 end-1">
+        <button className="absolute top-2 end-1 cursor-pointer">
           <MagnifyingGlassIcon size={24} />
         </button>
       </form>

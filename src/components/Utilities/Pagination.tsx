@@ -1,4 +1,4 @@
-import { scrollToTop } from "./ScrollToTop"
+import { scrollToTop } from "../../app/libs/ScrollToTop"
 
 const Pagination = ({ page, maxPage, setPage }: {page: number, maxPage: number, setPage: any}) => {
 
