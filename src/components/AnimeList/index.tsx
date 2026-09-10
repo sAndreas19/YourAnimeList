@@ -14,7 +14,7 @@ type KitsuAnime = {
   };
 };
 
-const AnimeList = ({ api }) => {
+const AnimeList = ({ api }: any) => {
   if (!api || !api.data || !Array.isArray(api.data)) {
     return (
       <div className="text-white">
@@ -25,12 +25,12 @@ const AnimeList = ({ api }) => {
   return (
     <>
       <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3 px-4">
-        {api?.data?.map((data: KitsuAnime) => {
+        {api.data?.map((data: KitsuAnime) => {
           return (
             <div key={data.id}>
               <Link href={`/${data.id}`} className="cursor-pointer hover:text-secondary transition-all">
                 <Image
-                  src={data.attributes.posterImage.large}
+                  src={data.attributes?.posterImage?.large || "/not_found.png"}
                   alt="..."
                   width={350}
                   height={350}
@@ -50,18 +50,3 @@ const AnimeList = ({ api }) => {
 };
 
 export default AnimeList;
-
-/*
-<div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3 px-4">
-    {anime?.data?.map((data: KitsuAnime) => {
-        return (
-            <div key={data.id} className="shadow-xl">
-                <AnimeList
-                    id={data.id}
-                    title={data.attributes?.titles?.en_jp || data.attributes?.canonicalTitle}
-                    imageUrl={data.attributes?.posterImage?.large}/>
-            </div>
-        )
-    })}
-</div>
-*/

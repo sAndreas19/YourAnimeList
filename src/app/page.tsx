@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Search from "./search/[keyword]/page";
 import AnimeList from "../components/AnimeList";
 import Header from "../components/AnimeList/Header";
 

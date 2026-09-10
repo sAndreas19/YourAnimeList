@@ -58,3 +58,9 @@ img:hover {
 @keyframes s6 { 
   100%{transform: rotate(1turn)}
 }
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
