@@ -28,7 +28,7 @@ const AnimeList = ({ api }: any) => {
         {api.data?.map((data: KitsuAnime) => {
           return (
             <div key={data.id}>
-              <Link href={`/${data.id}`} className="cursor-pointer hover:text-secondary transition-all">
+              <Link href={`/anime/${data.id}`} className="cursor-pointer hover:text-secondary transition-all">
                 <Image
                   src={data.attributes?.posterImage?.large || "/not_found.png"}
                   alt="..."
