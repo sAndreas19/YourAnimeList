@@ -1,4 +1,4 @@
-import { getAnime } from "../../libs/fetch-api";
+import { getAnime } from "../../../libs/fetch-api";
 import Image from "next/image";
 import { StarIcon } from "@phosphor-icons/react/dist/ssr";
 import Synopsis from "./read-more";

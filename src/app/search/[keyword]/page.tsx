@@ -1,6 +1,6 @@
 import AnimeList from "@/src/components/AnimeList";
 import Header from "@/src/components/AnimeList/Header";
-import { getAnime } from "../../libs/fetch-api";
+import { getAnime } from "../../../libs/fetch-api";
 
 const Page = async ({ params }: any) => {
 

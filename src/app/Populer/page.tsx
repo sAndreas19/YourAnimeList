@@ -5,7 +5,7 @@ import HeaderMenu from "@/src/components/Utilities/HeaderMenu";
 import { useEffect, useState } from "react";
 import AnimeList from "@/src/components/AnimeList";
 import Loading from "../loading";
-import { getAnime } from "../libs/fetch-api";
+import { getAnime } from "../../libs/fetch-api";
 
 const Page = () => {
   const [topAnime, setTopAnime] = useState<any>(null);
