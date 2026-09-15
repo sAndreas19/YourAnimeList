@@ -9,7 +9,7 @@ type header = {
 const Header = ({ title, linkHref, linkTitle }: header) => {
   return (
     <div className="p-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className="text-2xl font-bold border-b-2 border-secondary">{title}</h1>
       {linkHref && linkTitle ? (
         <Link
           href={linkHref}

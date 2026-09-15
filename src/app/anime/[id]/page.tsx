@@ -44,7 +44,7 @@ const page = async ({ params }: pageProps) => {
               <p>&nbsp;{(animeDetail.averageRating / 10).toFixed(2)} / 10</p>
             </div>
             <div className="flex flex-row font-bold">
-              <h3>{animeDetail.episodeCount} &nbsp;Episode</h3>
+              <h3>{animeDetail.episodeCount || "-"} &nbsp;Episode</h3>
             </div>
             <div className="flex flex-row font-bold">
               <h3>Status :&nbsp;</h3>

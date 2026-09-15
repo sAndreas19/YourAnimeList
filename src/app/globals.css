@@ -26,6 +26,7 @@ img {
 
 img:hover {
   scale: 105%;
+  overflow: hidden;
 }
 
 .loading {
