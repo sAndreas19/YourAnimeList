@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 const Header = ({ title }: { title: string }) => {
     const router = useRouter()
 
-    const handleBack = () => {
+    const handleBack = (e: any) => {
+      e.preventDefault()
         router.back()
     }
   return (

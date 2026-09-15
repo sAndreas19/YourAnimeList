@@ -3,6 +3,8 @@ import Image from "next/image";
 import { StarIcon } from "@phosphor-icons/react/dist/ssr";
 import Synopsis from "./read-more";
 import VideoPlayer from "@/src/components/Utilities/VideoPlayer";
+import CollectionButton from "@/src/components/AnimeList/CollectionButton";
+import { authUserSession } from "@/src/libs/auth-user";
 
 type pageProps = {
   params: Promise<{ id: string }>;
@@ -12,6 +14,7 @@ const page = async ({ params }: pageProps) => {
   const { id } = await params;
   const anime = await getAnime(`/anime/${id}`);
   const animeDetail = anime.data?.attributes;
+  const user = await authUserSession()
 
   return (
     <div>
@@ -58,6 +61,7 @@ const page = async ({ params }: pageProps) => {
           </div>
 
           <VideoPlayer youTubeId={animeDetail.youtubeVideoId}/>
+          <CollectionButton anime_id={id} user_email={user?.email}/>
         </div>
         <div className="p-4 tracking-wide leading-relaxed bg-black/40">
           <Synopsis text={animeDetail.synopsis}/>

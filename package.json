@@ -1,6 +1,7 @@
 {
   "name": "your_anime_list",
   "version": "0.1.0",
+  "author": "sAndreas19/reference_by_dea_afrizal",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,6 +13,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "next": "16.3.4",
     "next-auth": "^4.24.15",
+    "@prisma/client": "^6.9.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-youtube": "^10.1.0"
@@ -23,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "prisma": "^6.9.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

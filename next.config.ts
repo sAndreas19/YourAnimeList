@@ -1,6 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Original-Creator",
+            value: "sAndreas19"
+          },
+          {
+            key: "Reference",
+            value: "Dea Afrizal"
+          }
+        ]
+      }
+    ]
+  },
   images: {
     remotePatterns: [
       {
