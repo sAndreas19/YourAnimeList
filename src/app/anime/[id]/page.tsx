@@ -3,8 +3,10 @@ import Image from "next/image";
 import { StarIcon } from "@phosphor-icons/react/dist/ssr";
 import Synopsis from "./read-more";
 import VideoPlayer from "@/src/components/Utilities/VideoPlayer";
-import CollectionButton from "@/src/components/AnimeList/CollectionButton";
+import AddToCollectionButton from "@/src/components/AnimeList/AddToCollectionButton";
 import { authUserSession } from "@/src/libs/auth-user";
+import prisma from "@/src/libs/prisma";
+import ViewCollectionButton from "@/src/components/AnimeList/ViewCollectionButton";
 
 type pageProps = {
   params: Promise<{ id: string }>;
@@ -14,7 +16,12 @@ const page = async ({ params }: pageProps) => {
   const { id } = await params;
   const anime = await getAnime(`/anime/${id}`);
   const animeDetail = anime.data?.attributes;
-  const user = await authUserSession()
+  const user = await authUserSession();
+  const collection = user?.email
+    ? await prisma.collection.findFirst({
+        where: { user_email: user?.email, anime_id: id },
+      })
+    : null;
 
   return (
     <div>
@@ -24,7 +31,7 @@ const page = async ({ params }: pageProps) => {
           backgroundImage: `linear-gradient(rgba(15, 15, 26, 0.8), rgba(15, 15, 26, 0.8)), url(${animeDetail.coverImage?.large})`,
         }}
       >
-        <div className="flex flex-col md:flex-row p-2 mx-2 gap-5 relative">
+        <div className="flex flex-col md:flex-row p-2 mx-2 gap-3 md:gap-5 relative">
           <div className="w-[250px] min-w-[250px] shrink-0">
             <Image
               src={animeDetail.posterImage.large}
@@ -43,7 +50,7 @@ const page = async ({ params }: pageProps) => {
               <h2>{animeDetail.titles.en_jp || animeDetail.canonicalTitle}</h2>
             </div>
             <div className="flex flex-row font-bold">
-              <StarIcon weight="fill" size={28 } />
+              <StarIcon weight="fill" size={28} />
               <p>&nbsp;{(animeDetail.averageRating / 10).toFixed(2)} / 10</p>
             </div>
             <div className="flex flex-row font-bold">
@@ -60,11 +67,18 @@ const page = async ({ params }: pageProps) => {
             </div>
           </div>
 
-          <VideoPlayer youTubeId={animeDetail.youtubeVideoId}/>
-          <CollectionButton anime_id={id} user_email={user?.email}/>
+          <div className="md:absolute flex flex-col right-2 gap-1 font-bold">
+            {collection ? (
+              <ViewCollectionButton user_email={user?.email} />
+            ) : (
+              <AddToCollectionButton anime_id={id} user_email={user?.email} />
+            )}
+          </div>
+
+          <VideoPlayer youTubeId={animeDetail.youtubeVideoId} />
         </div>
         <div className="p-4 tracking-wide leading-relaxed bg-black/40">
-          <Synopsis text={animeDetail.synopsis}/>
+          <Synopsis text={animeDetail.synopsis} />
         </div>
       </div>
     </div>
