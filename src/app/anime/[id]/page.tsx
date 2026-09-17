@@ -7,6 +7,8 @@ import AddToCollectionButton from "@/src/components/AnimeList/AddToCollectionBut
 import { authUserSession } from "@/src/libs/auth-user";
 import prisma from "@/src/libs/prisma";
 import ViewCollectionButton from "@/src/components/AnimeList/ViewCollectionButton";
+import CommentInput from "@/src/components/AnimeList/CommentInput";
+import CommentBox from "@/src/components/AnimeList/CommentBox";
 
 type pageProps = {
   params: Promise<{ id: string }>;
@@ -71,16 +73,20 @@ const page = async ({ params }: pageProps) => {
             {collection ? (
               <ViewCollectionButton user_email={user?.email} />
             ) : (
-              <AddToCollectionButton anime_id={id} user_email={user?.email} />
+              <AddToCollectionButton anime_id={id} user_email={user?.email} anime_image={animeDetail.posterImage.large} anime_title={animeDetail.titles.en_jp}/>
             )}
           </div>
-
+            
           <VideoPlayer youTubeId={animeDetail.youtubeVideoId} />
         </div>
+        
         <div className="p-4 tracking-wide leading-relaxed bg-black/40">
           <Synopsis text={animeDetail.synopsis} />
         </div>
       </div>
+      
+      <CommentBox anime_id={id}/>
+      <CommentInput anime_id={id} user_email={user?.email} username={user?.name} anime_title={animeDetail.titles.en_jp}/>
     </div>
   );
 };

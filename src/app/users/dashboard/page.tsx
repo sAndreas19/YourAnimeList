@@ -19,7 +19,7 @@ const page = async () => {
         </Link>
         <Link
           className="bg-cards text-xl py-2 px-5 rounded border hover:bg-secondary hover:text-cards"
-          href="dashboard/collection"
+          href="dashboard/comment"
         >
           My Comment
         </Link>

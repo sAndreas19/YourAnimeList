@@ -8,9 +8,11 @@ import ViewCollectionButton from "./ViewCollectionButton";
 type pageProps = {
   anime_id: string;
   user_email: string | undefined | null;
+  anime_image: string
+  anime_title: string
 };
 
-const AddToCollectionButton = ({ anime_id, user_email }: pageProps) => {
+const AddToCollectionButton = ({ anime_id, user_email, anime_image, anime_title }: pageProps) => {
   const [isCreated, setIsCreated] = useState(false);
   const navigation = useRouter();
 
@@ -20,7 +22,7 @@ const AddToCollectionButton = ({ anime_id, user_email }: pageProps) => {
       navigation.push("/api/auth/signin");
     }
 
-    const data = { anime_id, user_email };
+    const data = { anime_id, user_email, anime_image, anime_title };
 
     const response = await fetch("/api/v1/collection/", {
       method: "POST",

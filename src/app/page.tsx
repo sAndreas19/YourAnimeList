@@ -4,7 +4,7 @@ import { getAnime } from "../libs/fetch-api";
 
 const Page = async () => {
   const topAnime = await getAnime("anime", "page[limit]=4&sort=-userCount");
-  const trendingAnime = await getAnime("trending/anime");
+  const trendingAnime = await getAnime("anime", "sort=-averageRating&page[limit]=10");
 
   return (
     <>
@@ -17,7 +17,7 @@ const Page = async () => {
         <AnimeList api={topAnime} />
       </section>
       <section>
-        <Header title={"Trending Anime"} />
+        <Header title={"Rating Terbaik"} />
         <AnimeList api={trendingAnime} />
       </section>
     </>
