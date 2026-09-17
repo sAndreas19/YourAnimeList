@@ -1,3 +1,11 @@
+## Overview  
+# Ini adalah project anime list yang dikerjakan dengan sepenuh hati untuk menjadi portofolio sekaligus media belajar dengan metode challenge-based learning.  
+
+## Fitur Utama:  
+# Menampilkan informasi teraktual dari salah satu website anime terbesar dengan UI yang menarik dan mudah dipahami oleh setiap pengguna  
+# My collection untuk membantu user menyimpan koleksi animenya secara terpusat  
+# Komentar supaya user bisa meninggalkan kesan dan pesan pada anime yang dikunjunginya dan sebagai media berinteraksi dengan pengguna lain  
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
