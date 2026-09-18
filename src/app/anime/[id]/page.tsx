@@ -19,11 +19,16 @@ const page = async ({ params }: pageProps) => {
   const anime = await getAnime(`/anime/${id}`);
   const animeDetail = anime.data?.attributes;
   const user = await authUserSession();
-  const collection = user?.email
-    ? await prisma.collection.findFirst({
-        where: { user_email: user?.email, anime_id: id },
-      })
-    : null;
+  let collection = null;
+  try {
+    collection = user?.email
+      ? await prisma.collection.findFirst({
+          where: { user_email: user.email, anime_id: id },
+        })
+      : null;
+  } catch (error) {
+    console.error("Database tidak tersedia, Error:", error);
+  }
 
   return (
     <div>
@@ -73,20 +78,32 @@ const page = async ({ params }: pageProps) => {
             {collection ? (
               <ViewCollectionButton user_email={user?.email} />
             ) : (
-              <AddToCollectionButton anime_id={id} user_email={user?.email} anime_image={animeDetail.posterImage.large} anime_title={animeDetail.titles.en_jp}/>
+              <AddToCollectionButton
+                anime_id={id}
+                user_email={user?.email}
+                anime_image={animeDetail.posterImage.large}
+                anime_title={animeDetail.titles.en_jp}
+              />
             )}
           </div>
-            
+
           <VideoPlayer youTubeId={animeDetail.youtubeVideoId} />
         </div>
-        
+
         <div className="p-4 tracking-wide leading-relaxed bg-black/40">
           <Synopsis text={animeDetail.synopsis} />
         </div>
       </div>
-      
-      <CommentBox anime_id={id}/>
-      <CommentInput anime_id={id} user_email={user?.email} username={user?.name} anime_title={animeDetail.titles.en_jp}/>
+
+      <CommentBox anime_id={id} />
+      <CommentInput
+        anime_id={id}
+        user_email={user?.email}
+        username={user?.name}
+        anime_title={animeDetail.titles.en_jp}
+        anime_image={animeDetail.posterImage.large}
+        user_image={user?.image}
+      />
     </div>
   );
 };

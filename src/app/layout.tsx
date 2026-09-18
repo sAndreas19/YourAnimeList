@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -28,12 +29,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <Navbar />
-        {children}
+        <main className="min-h-screen">{children}</main>
+        <Footer />
         <script
-        dangerouslySetInnerHTML={{
-          __html: `console.log("%cMade by sAndreas19!, reference: Dea Afrizal", "color: white; font-size: 8px; background: blue; padding: 0 4px; border-radius: 2px;");`,
-        }}
-      />
+          dangerouslySetInnerHTML={{
+            __html: `console.log("%cMade by sAndreas19!, reference: Dea Afrizal", "color: white; font-size: 8px; background: blue; padding: 0 4px; border-radius: 2px;");`,
+          }}
+        />
       </body>
     </html>
   );

@@ -1,30 +1,57 @@
-import prisma from "@/src/libs/prisma"
+import prisma from "@/src/libs/prisma";
+import Image from "next/image";
 
-const CommentBox = async({anime_id}: {anime_id: string}) => {
-    const comments = await prisma.comment.findMany({where: {anime_id}})
+const CommentBox = async ({ anime_id }: { anime_id: string }) => {
+  let comments: any[] = [];
+  let dbError = false;
+  try {
+    comments = await prisma.comment.findMany({ where: { anime_id } });
+  } catch (error) {
+    dbError = true;
+    console.error("Database Tidak Tersedia, Error:", error);
+  }
   return (
     <div className="px-4 py-2">
-        <div className="bg-cards rounded p-2">
-            <div className="flex items-center gap-1 text-primary py-2 border-b-1">
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#FF4B91" viewBox="0 0 256 256"><path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM84,116a12,12,0,1,0,12,12A12,12,0,0,0,84,116Zm88,0a12,12,0,1,0,12,12A12,12,0,0,0,172,116Zm60,12A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Zm-16,0A88,88,0,1,0,51.81,172.06a8,8,0,0,1,.66,6.54L40,216,77.4,203.53a7.85,7.85,0,0,1,2.53-.42,8,8,0,0,1,4,1.08A88,88,0,0,0,216,128Z"></path></svg>
-            <h1 className="font-bold text-xl">Komentar ({comments.length})</h1>
-            </div>
-            <div className="text-sm">
-            <div className="py-2">
-        {comments.map(comment => {
-            return(
-                <div key={comment.id} className="bg-cards">
-                    <p className="text-secondary font-bold">{comment.username}</p>
-                    <p>{comment.comment}</p>
-                </div>
-            )
-        })}
-            </div>
-            </div>
+      <div className="bg-cards rounded p-2">
+        <div className="flex items-center gap-1 text-primary py-2 border-b-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="#FF4B91"
+            viewBox="0 0 256 256"
+          >
+            <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM84,116a12,12,0,1,0,12,12A12,12,0,0,0,84,116Zm88,0a12,12,0,1,0,12,12A12,12,0,0,0,172,116Zm60,12A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Zm-16,0A88,88,0,1,0,51.81,172.06a8,8,0,0,1,.66,6.54L40,216,77.4,203.53a7.85,7.85,0,0,1,2.53-.42,8,8,0,0,1,4,1.08A88,88,0,0,0,216,128Z"></path>
+          </svg>
+          <h1 className="font-bold text-xl">Komentar ({comments.length})</h1>
         </div>
+        {dbError && <p>Database tidak tersedia...</p>}
+        <div className="text-sm">
+          <div className="py-2">
+            {comments.map((comment) => {
+              return (
+                <div key={comment.id} className="bg-cards flex items-center gap-2 py-2">
+                  <Image
+                    src={comment.user_image}
+                    alt="Anime Image"
+                    width={30}
+                    height={30}
+                    className="rounded-[50] border border-secondary w-8 h-8 object-cover shrink-0"
+                  />
+                  <div>
+                    <p className="text-secondary font-bold">
+                      {comment.username}
+                    </p>
+                    <p>{comment.comment}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CommentBox
+export default CommentBox;

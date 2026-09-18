@@ -24,14 +24,20 @@ const AddToCollectionButton = ({ anime_id, user_email, anime_image, anime_title 
 
     const data = { anime_id, user_email, anime_image, anime_title };
 
-    const response = await fetch("/api/v1/collection/", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+    try {
 
-    const collection = await response.json();
-    if (collection.isCreated) {
-      setIsCreated(true);
+      const response = await fetch("/api/v1/collection/", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+  
+      const collection = await response.json();
+      if (collection.isCreated) {
+        setIsCreated(true);
+      }
+    } catch(error) {
+      alert("Gagal menambahkan. Periksa koneksi internet kamu.")
+      console.error("db tidak tersedia")
     }
   };
   return (
